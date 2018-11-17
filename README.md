@@ -4,7 +4,7 @@
     sudo apt-get update
     sudo apt-get install rcm
     git clone https://github.com/skairunner/dotfiles ~/.dotfiles
-    rcup
+    RCRC="~/.dotfiles/rcrc" rcup
 
 # Vim Setup
 
