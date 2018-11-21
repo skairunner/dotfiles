@@ -10,6 +10,9 @@ if exists('*minpac#init')
   call minpac#add('Yggdroot/indentLine')
   call minpac#add('junegunn/vim-peekaboo')
   call minpac#add('srcery-colors/srcery-vim')
+  call minpac#add('vim-python/python-syntax')
+  call minpac#add('Konfekt/FastFold')
+  call minpac#add('tmhedberg/SimpylFold')
 endif
 
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'do': 'call minpac#status()'})
@@ -39,12 +42,16 @@ set list listchars=tab:│\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 " Lines
 set number relativenumber
 
+" Folding
+set foldlevel=1
+
 " Indent settings
 augroup indent
   autocmd!
   autocmd FileType python setlocal ts=4 sw=4 expandtab
   autocmd FileType javascript setlocal ts=2 sw=2 expandtab
-  autocmd FileType html setlocal ts=4 sw=4 noexpandtab
+  autocmd FileType html setlocal ts=2 sw=2 expandtab
+  autocmd FileType htmldjango doau FileType html
   autocmd FileType yaml setlocal ts=2 sw=2 expandtab
 augroup END
 
@@ -67,3 +74,6 @@ if !empty(matchstr(system("uname -a"), "Microsoft"))
     \ 'cache_enabled': 1,
     \ }
 endif
+
+" Python 3 coloration
+let g:python_highlight_all = 1

@@ -6,18 +6,30 @@ if [ "$(type -t __git_ps1)" = function ]; then
 else
   PS1='\[\e[32m\]\u@\h \[\e[94m\]\w \$ \[$reset\]'
 fi
+export PROMPT_DIRTRIM=2
+
+for vim in nvim vim; do
+  if command -v $vim >/dev/null; then
+    export VISUAL=$vim
+    break
+  fi
+done
+if [ -z "$VISUAL" ]; then
+  export VISUAL=vi
+fi
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
-export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
-export DOCKER_HOST='tcp://192.168.99.100:2376'
-export DOCKER_CERT_PATH=/mnt/c/Users/Jamie/.docker/machine/certs
-export DOCKER_TLS_VERIFY=1
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-export PROMPT_DIRTRIM=2
-
 # Add autocomplete for scripts
 _managesh_options='makemigrations migrate runserver startapp'
 complete -W "${_managesh_options}" 'manage.sh'
+
+if command -v npiperelay.exe >/dev/null; then
+    function docker () {
+        if [ ! -S /var/run/docker.sock ]; then
+          sudo sh -c "socat UNIX-LISTEN:/var/run/docker.sock,fork,group=docker,umask=007 EXEC:'$(command -v npiperelay.exe) -ep -s //./pipe/docker_engine',nofork &"
+        fi
+        command docker "$@"
+    }
+fi
