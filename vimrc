@@ -4,6 +4,7 @@ if exists('*minpac#init')
   call minpac#add('tpope/vim-sensible')
   call minpac#add('tpope/vim-repeat')
   call minpac#add('tpope/vim-sleuth')
+  call minpac#add('tpope/vim-commentary')
   call minpac#add('w0rp/ale')
   call minpac#add('machakann/vim-sandwich')
   call minpac#add('justinmk/vim-sneak')
@@ -13,6 +14,7 @@ if exists('*minpac#init')
   call minpac#add('vim-python/python-syntax')
   call minpac#add('Konfekt/FastFold')
   call minpac#add('tmhedberg/SimpylFold')
+  call minpac#add('rust-lang/rust.vim')
 endif
 
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'do': 'call minpac#status()'})
@@ -43,7 +45,8 @@ set list listchars=tab:│\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 set number relativenumber
 
 " Folding
-set foldlevel=1
+set foldlevel=99
+set foldmethod=syntax
 
 " Indent settings
 augroup indent
@@ -77,3 +80,8 @@ endif
 
 " Python 3 coloration
 let g:python_highlight_all = 1
+
+" ALE Rust
+let g:ale_linters = {'rust': ['rls']}
+let g:ale_rust_rls_toolchain = "stable"
+
