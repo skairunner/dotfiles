@@ -56,6 +56,10 @@ augroup indent
   autocmd FileType html setlocal ts=2 sw=2 expandtab
   autocmd FileType htmldjango doau FileType html
   autocmd FileType yaml setlocal ts=2 sw=2 expandtab
+  autocmd FileType eruby setlocal ts=2 sw=2 expandtab
+  autocmd FileType json setlocal ts=2 sw=2 expandtab
+  autocmd FileType css setlocal ts=2 sw=2 expandtab
+  autocmd FileType scss doau FileType css
 augroup END
 
 " Sneak with f
@@ -81,7 +85,8 @@ endif
 " Python 3 coloration
 let g:python_highlight_all = 1
 
-" ALE Rust
 let g:ale_linters = {'rust': ['rls']}
+let g:ale_python_flake8_auto_pipenv = 1
+" ALE Rust
 let g:ale_rust_rls_toolchain = "stable"
 
