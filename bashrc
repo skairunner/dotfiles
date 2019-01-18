@@ -33,3 +33,6 @@ if command -v npiperelay.exe >/dev/null; then
         command docker "$@"
     }
 fi
+
+
+eval "$(direnv hook bash)"

@@ -15,6 +15,7 @@ if exists('*minpac#init')
   call minpac#add('Konfekt/FastFold')
   call minpac#add('tmhedberg/SimpylFold')
   call minpac#add('rust-lang/rust.vim')
+  call minpac#add('neoclide/coc.nvim')
 endif
 
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'do': 'call minpac#status()'})
@@ -90,3 +91,5 @@ let g:ale_python_flake8_auto_pipenv = 1
 " ALE Rust
 let g:ale_rust_rls_toolchain = "stable"
 
+" coc.nvim use tab to complete
+inoremap <expr> <tab> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
