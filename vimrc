@@ -15,7 +15,6 @@ if exists('*minpac#init')
   call minpac#add('Konfekt/FastFold')
   call minpac#add('tmhedberg/SimpylFold')
   call minpac#add('rust-lang/rust.vim')
-  call minpac#add('neoclide/coc.nvim')
 endif
 
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'do': 'call minpac#status()'})
