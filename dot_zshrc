@@ -49,6 +49,7 @@ plugins=(
   gitignore
   pyenv
   ssh-agent
+  sudo
   tmux
   zsh-autosuggestions
   zsh-history-substring-search
