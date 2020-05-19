@@ -62,6 +62,9 @@ zstyle :omz:plugins:ssh-agent agent-forwarding on
 ZSH_TMUX_AUTOSTART='true'
 ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 
+export FZF_CTRL_T_COMMAND='fdfind -LH -E .git -t f -t d . $dir'
+export FZF_ALT_C_COMMAND='fdfind -L -t d . $dir'
+
 source $ZSH/oh-my-zsh.sh
 
 # Editor

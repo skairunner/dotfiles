@@ -1,7 +1,7 @@
 # system
 
 ```sh
-$ sudo apt install direnv fzf neovim tmux zsh
+$ sudo apt install direnv fd-find fzf neovim tmux zsh
 $ ssh-keygen
 ```
 
