@@ -19,10 +19,16 @@ $ nvim
 :PackUpdate
 ```
 
+# poetry
+```sh
+$ curl -sSfL https://raw.githubusercontent.com/python-poetry/poetry/develop/get-poetry.py | python3 - --no-modify-path
+```
+
 # pyenv
 
 ```sh
 $ curl -sSfL https://pyenv.run | bash
+$ pyenv global [default version]
 ```
 
 # zsh
