@@ -1,14 +1,15 @@
 # system
 
 ```sh
-$ sudo apt install direnv neovim tmux zsh
+$ sudo apt install direnv fzf neovim tmux zsh
+$ ssh-keygen
 ```
 
 # dotfiles
 
 ```sh
 $ curl -sSfL https://git.io/chezmoi | sh -s -- -b ~/.local/bin
-$ ~/.local/bin/chezmoi init https://github.com/skairunner/dotfiles
+$ ~/.local/bin/chezmoi init --apply https://github.com/skairunner/dotfiles
 ```
 # neovim
 

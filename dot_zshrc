@@ -43,6 +43,7 @@ plugins=(
   common-aliases
   direnv
   docker
+  fzf
   gcloud
   git
   gitignore
