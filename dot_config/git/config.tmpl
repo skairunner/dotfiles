@@ -1,0 +1,30 @@
+[user]
+	name = {{ .user.name }}
+	email = {{ .user.email }}
+
+[pull]
+	rebase = true
+[commit]
+	verbose = true
+[rebase]
+	stat = true
+	autoSquash = true
+[status]
+	short = true
+	branch = true
+	showStash = true
+	submoduleSummary = true
+
+[log]
+	abbrevCommit = true
+[format]
+	pretty = onelineplus
+[pretty]
+	onelineplus = format:%C(yellow)%h%C(auto)%d%C(reset) %s %C(blue)(%cr)%C(reset) %C(green)<%aN>
+	columns = format:%C(yellow)%h%C(magenta)% G? %C(blue)%<(12,trunc)%ar %C(green)%<(16,trunc)%aN %C(reset)%s%C(auto)%d
+
+[url "git@github.com:"]
+	pushInsteadOf = https://github.com/
+	pushInsteadOf = git://github.com/
+
+# vi: ft=conf
