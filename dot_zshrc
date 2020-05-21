@@ -11,8 +11,12 @@ fi
 PATH="$HOME/.local/bin:$PATH"
 
 # tmux
-if [[ -z $TMUX ]] && [[ $TERM_PROGRAM != vscode ]] && [[ -z $(tmux list-clients -t "$USER" 2>/dev/null) ]]; then
-  tmux -f "$HOME/.config/tmux/tmux.conf" new -s "$USER" -A >&/dev/null; exit
+if [[ -z $TMUX && $TERM_PROGRAM != vscode ]]; then
+  if ! tmux has-session -t "$USER" >&/dev/null; then
+    tmux -f "$HOME/.config/tmux/tmux.conf" new -s "$USER"; exit
+  elif [[ -z $(tmux list-clients -t "$USER" 2>/dev/null) ]]; then
+    tmux attach -t "$USER"; exit
+  fi
 fi
 
 # Oh-My-ZSH!
