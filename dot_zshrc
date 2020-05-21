@@ -48,16 +48,14 @@ fi
 # Plugins
 plugins=(
   autoupdate
-  command-not-found
   common-aliases
   direnv
-  docker
   fzf
   gcloud
-  git
   gitignore
   pyenv
   ssh-agent
+  z
   zsh_reload
   zsh-autosuggestions
   zsh-syntax-highlighting
@@ -70,6 +68,13 @@ source "$HOME/.p10k.zsh"
 # Editor
 export EDITOR=nvim
 export VISUAL=nvim
+
+# command-not-found
+if [[ -x /usr/lib/command-not-found ]]; then
+  function command_not_found_handler {
+    /usr/lib/command-not-found -- "$1" && :
+  }
+fi
 
 # fzf
 export FZF_CTRL_T_COMMAND='fdfind -t f -t d -L -H . $dir'
