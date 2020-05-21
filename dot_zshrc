@@ -1,14 +1,19 @@
 # PATH
-if [ -z "$XDG_CONFIG_HOME" ]; then
+if [[ -z $XDG_CONFIG_HOME ]]; then
   export XDG_CONFIG_HOME="$HOME/.config"
 fi
-if [ -z "$XDG_DATA_HOME" ]; then
+if [[ -z $XDG_DATA_HOME ]]; then
   export XDG_DATA_HOME="$HOME/.local/share"
 fi
-if [ -z "$XDG_CACHE_HOME" ]; then
+if [[ -z $XDG_CACHE_HOME ]]; then
   export XDG_CACHE_HOME="$HOME/.cache"
 fi
 PATH="$HOME/.local/bin:$PATH"
+
+# tmux
+if [[ -z $TMUX ]] && [[ $TERM_PROGRAM != vscode ]] && [[ -z $(tmux list-clients -t "$USER" 2>/dev/null) ]]; then
+  tmux -f "$HOME/.config/tmux/tmux.conf" new -s "$USER" -A >&/dev/null; exit
+fi
 
 # Oh-My-ZSH!
 export ZSH="$XDG_DATA_HOME/oh-my-zsh"
@@ -20,22 +25,19 @@ COMPLETION_WAITING_DOTS='true'
 ENABLE_CORRECTION='true'
 
 # Custom Plugins
-if [ ! -d "$ZSH_CUSTOM/plugins" ]; then
-  mkdir -p "$ZSH_CUSTOM/plugins"
-fi
-if [ ! -d "$ZSH_CUSTOM/plugins/autoupdate" ]; then
+if [[ ! -d $ZSH_CUSTOM/plugins/autoupdate ]]; then
   git clone https://github.com/TamCore/autoupdate-oh-my-zsh-plugins "$ZSH_CUSTOM/plugins/autoupdate"
 fi
-if [ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
+if [[ ! -d $ZSH_CUSTOM/themes/powerlevel10k ]]; then
   git clone https://github.com/romkatv/powerlevel10k "$ZSH_CUSTOM/themes/powerlevel10k"
 fi
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
+if [[ ! -d $ZSH_CUSTOM/plugins/zsh-autosuggestions ]]; then
   git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
 fi
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-history-substring-search" ]; then
-   git clone https://github.com/zsh-users/zsh-history-substring-search "$ZSH_CUSTOM/plugins/zsh-history-substring-search"
+if [[ ! -d $ZSH_CUSTOM/plugins/zsh-history-substring-search ]]; then
+  git clone https://github.com/zsh-users/zsh-history-substring-search "$ZSH_CUSTOM/plugins/zsh-history-substring-search"
 fi
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
+if [[ ! -d $ZSH_CUSTOM/plugins/zsh-syntax-highlighting ]]; then
   git clone https://github.com/zsh-users/zsh-syntax-highlighting "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
 fi
 
@@ -52,33 +54,27 @@ plugins=(
   gitignore
   pyenv
   ssh-agent
-  sudo
-  tmux
-  zsh-autosuggestions
-  zsh-history-substring-search
-  zsh-syntax-highlighting
   zsh_reload
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  zsh-history-substring-search
 )
 
-# Plugin Preferences
-zstyle :omz:plugins:ssh-agent agent-forwarding on
-
-ZSH_TMUX_AUTOSTART='true'
-ZSH_TMUX_AUTOQUIT='false'
-ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
-
-export FZF_CTRL_T_COMMAND='fdfind -LH -E .git -t f -t d . $dir'
-export FZF_ALT_C_COMMAND='fdfind -L -t d . $dir'
-
-source $ZSH/oh-my-zsh.sh
-source $HOME/.p10k.zsh
+source "$ZSH/oh-my-zsh.sh"
+source "$HOME/.p10k.zsh"
 
 # Editor
-for vim in nvim vim vi; do
-  if command -v $vim >/dev/null; then
-    export EDITOR=$vim
-    break
-  fi
-done
+export EDITOR=nvim
+export VISUAL=nvim
+
+# fzf
+export FZF_CTRL_T_COMMAND='fdfind -t f -t d -L -H . $dir'
+export FZF_ALT_C_COMMAND='fdfind -t d -L . $dir'
+
+# zsh-history-substring-search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
 
 # vi: ft=zsh
