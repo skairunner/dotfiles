@@ -1,7 +1,7 @@
 scriptencoding utf-8
 
 " Plugins
-if exists('*minpac#init')
+if exists('g:loaded_minpac')
   call minpac#init()
   call minpac#add('Konfekt/FastFold')
   call minpac#add('Yggdroot/indentLine')
