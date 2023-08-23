@@ -13,7 +13,7 @@ PATH="$HOME/.local/bin:$PATH"
 # tmux
 if [[ -z $TMUX && $TERM_PROGRAM != vscode ]]; then
   if ! tmux has-session -t "$USER" >&/dev/null; then
-    tmux -f "$HOME/.config/tmux/tmux.conf" new -s "$USER"; exit
+    tmux new -s "$USER"
   elif [[ -z $(tmux list-clients -t "$USER" 2>/dev/null) ]]; then
     tmux attach -t "$USER"; exit
   fi
@@ -83,7 +83,9 @@ export FZF_ALT_C_COMMAND='fdfind -t d -L . $dir'
 # zsh-history-substring-search
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
+if [[ "$terminfo[kcuu1]" != '' ]]; then
+  bindkey "$terminfo[kcuu1]" history-substring-search-up
+  bindkey "$terminfo[kcud1]" history-substring-search-down
+fi
 
 # vi: ft=zsh
