@@ -5,6 +5,13 @@ $ sudo apt install direnv fd-find fzf neovim tmux zsh
 $ ssh-keygen
 ```
 
+
+On Mac:
+```sh
+$ brew install direnv fd fzf neovim tmux zsh
+$ ssh-keygen
+```
+
 # dotfiles
 
 ```sh
